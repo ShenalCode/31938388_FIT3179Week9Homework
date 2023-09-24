@@ -35,16 +35,20 @@
     {
       "transform": [
         {
-          "lookup": "properties.NAME",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/ShenalCode/31938388_FIT3179Week9Homework/main/data/WHR_all.csv"
-            },
-            "key": "country",
-            "fields": [
-              "happiness_score"
-            ]
+          "filter": {
+            "field": "year",
+            "equal": 2020
           }
+        },
+        {
+          "aggregate": [
+            {
+              "op": "mean",
+              "field": "happiness_score",
+              "as": "avg_happiness_score"
+            }
+          ],
+          "groupby": ["country"]
         }
       ],
       "mark": {
@@ -53,7 +57,7 @@
       },
       "encoding": {
         "color": {
-          "field": "happiness_score",
+          "field": "avg_happiness_score",
           "type": "quantitative",
           "scale": {"type": "linear"}
         },
